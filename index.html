@@ -70,7 +70,7 @@
 </main>
 
 <script>
-const CONFIG = {"id":"b7622d127131","title":"Access Terminal","tag":"ACCT // Checkpoint","intro":"Solve the challenge and submit the flag to reveal your letters.","total":1,"iter":200000,"first":{"question":"Find the StarHub and M1 networking equipment in CityLink Mall. Their labels look like these examples, but the numbers (such as 01 and 51) differ from box to box. The X and Y characters are the same on every box:\n\n• StarHub: ISA35-B1-01-XXXXXX\n• M1: RAFFLES LINK-B1/51 YYYYYYY\n\nKey: XXXXXX followed by YYYYYYY (13 characters), in uppercase, with no spaces.\n\nDecrypt the flag with RC4, using the key as UTF-8.","code":"","codes":[{"label":"Encrypted flag (RC4, hex)","text":"1ea4152d6deacce82add18ad4131268404b5242a88f6169c93623bf4"}],"image":"","imageAlt":"","placeholder":"ACCT{...}","hint":"CyberChef has an RC4 operation. Check its input format.","lock":{"s":"AV9Hei1Xm16gG5WrIugzHQ==","boxes":[{"i":"epWZHwlaA385OZ/k","c":"HuIMzgI960WkILj26b6p8ngYXSLGK9hubsYnKKX6zD0NOr3FBBP2JT5WAcFPGhi/9NTXBScr4T3jOXEP2a7XbtgxN5aAjByOT9j3nrF3deKOSuPWY6wFIS6ZW7McT0M="},{"i":"balXeHLIMddIpB7a","c":"TQmdjVF5wBF6ZkDFWRLynKUZvBy2ZaSdYVC/68N33ej6PelLoNi4yN4feJWjDYZxwFAu0ZLtBLWbedfGNy4pl6xQkBl4ZKzbGfAnRknUTlRC6rHdjBAL34UoPWgsOys="}]}}};
+const CONFIG = {"id":"8847b3d74119","title":"Access Terminal","tag":"ACCT // Checkpoint","intro":"Solve the challenge and submit the flag to reveal your letter.","total":1,"iter":200000,"first":{"question":"Find the StarHub and M1 networking equipment in CityLink Mall. Their labels look like these examples, but the numbers (such as 01 and 51) differ from box to box. The X and Y characters are the same on every box:\n\n• StarHub: ISA35-B1-01-XXXXXX\n• M1: RAFFLES LINK-B1/51 YYYYYYY\n\nKey: XXXXXX followed by YYYYYYY (13 characters), in uppercase, with no spaces.\n\nDecrypt the flag with RC4, using the key as UTF-8.","code":"","codes":[{"label":"Encrypted flag (RC4, hex)","text":"1ea4152d6deacce82add18ad4131268404b5242a88f6169c93623bf4"}],"image":"","imageAlt":"","placeholder":"ACCT{...}","hint":"CyberChef has an RC4 operation. Check its input format.","lock":{"s":"G6TjgcwkUMMP+YVoZ3Xweg==","boxes":[{"i":"g5INKVzCiN/O+lhc","c":"RbtxWHBn4o4hPrs4r61kw3aq1IzTcczHwbncYGVm7ncbWsVanTvBaz+D0Ew5LsQ9ZSvKBAqlvYUyUV393hcxJ+tLPrLBf51+ZV9X7EMlbS8TN+ojwSRS/KY="},{"i":"DJUEWIIs1H05bzTo","c":"YBpl3/yJkxC54CKK2P2Ai86uWg6tUKBc1ww6UZ7oIDVkV8P0R+KXxcRHfX0rYEdVE/2B/qlSIZqRuhSlZCugtUMJi514LJLUrv7zPRltVnhb1lb6IlDPmhU="}]}}};
 
 const enc = new TextEncoder(), dec = new TextDecoder();
 const norm = s => String(s).normalize("NFKC").toUpperCase().replace(/[^A-Z0-9]/g, "");
@@ -163,7 +163,8 @@ function renderStage(note) {
 function renderGranted(final) {
   stageNo = CONFIG.total; drawProgress();
   const card = $("card"); card.innerHTML = ""; card.className = "card granted";
-  card.append(el("p", "big", "ACCESS GRANTED"), el("p", "intro", "Your letters:"));
+  const n = final.letters.replace(/\s+/g, "").length;
+  card.append(el("p", "big", "ACCESS GRANTED"), el("p", "intro", n === 1 ? "Your letter:" : "Your letters:"));
   const row = el("div", "letters");
   [...final.letters.replace(/\s+/g, "")].forEach((ch, i) => {
     const s = el("span", null, ch); s.style.animationDelay = (0.15 + i * 0.18) + "s"; row.append(s);
